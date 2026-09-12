@@ -1,0 +1,30 @@
+@import url('https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;400i;700&display=fallback');
+
+:host {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+ion-content {
+  --background: #212529; 
+}
+
+.chart-card {
+  background-color: #343a40;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  
+  .chart-header {
+    color: #fff;
+    padding: 15px;
+    border-bottom: 1px solid #4b545c;
+    font-weight: 600;
+  }
+  
+  .chart-body {
+    padding: 15px;
+    height: 300px;
+    position: relative;
+    width: 100%;
+  }
+}

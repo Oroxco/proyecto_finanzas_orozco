@@ -1,3 +1,6 @@
+# GitHub Repository
+https://github.com/Oroxco/proyecto_finanzas_orozco.git
+
 # Personal Expense Tracking App 📊
 
 Aplicación Full-Stack para el control de finanzas personales desarrollada como proyecto escolar. Permite la gestión de transacciones y su visualización en un panel interactivo.

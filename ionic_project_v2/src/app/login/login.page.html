@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div style="display: flex; flex-direction: column; height: 100%; justify-content: center;">
+    
+    <div class="ion-text-center ion-margin-bottom">
+      <ion-icon name="person-circle-outline" style="font-size: 80px; color: var(--ion-color-primary);"></ion-icon>
+      <h2>Bienvenido</h2>
+    </div>
+
+    <ion-list>
+      <ion-item>
+        <ion-input 
+          label="Usuario" 
+          label-placement="stacked" 
+          type="text" 
+          [(ngModel)]="usuario" 
+          placeholder="Ej: admin">
+        </ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-input 
+          label="Contraseña" 
+          label-placement="stacked" 
+          type="password" 
+          [(ngModel)]="password" 
+          placeholder="Ej: 1234">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" class="ion-margin-top" (click)="iniciarSesion()">
+      ENTRAR
+    </ion-button>
+    
+  </div>
+</ion-content>

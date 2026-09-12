@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Contacto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarSesion()">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>Contacto Corporativo</h2>
+  <p>Calle Cualquiera, 44. Ciudad | +52 555 555 000</p>
+
+  <h2 style="margin-top: 1.5rem;">Enviar Mensaje</h2>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="contacto.nombre" placeholder="Tu nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Empresa</ion-label>
+      <ion-input type="text" [(ngModel)]="contacto.empresa" placeholder="Tu empresa"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Correo</ion-label>
+      <ion-input type="email" [(ngModel)]="contacto.email" placeholder="correo@ejemplo.com"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Mensaje</ion-label>
+      <ion-textarea rows="3" [(ngModel)]="contacto.mensaje" placeholder="Escribe tu mensaje..."></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="enviarMensaje()">
+    Enviar Correo
+  </ion-button>
+</ion-content>

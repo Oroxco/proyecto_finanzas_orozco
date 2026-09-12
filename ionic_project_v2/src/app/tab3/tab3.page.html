@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>Dashboard de Gastos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <div class="container-fluid" data-bs-theme="dark">
+    <div class="row">
+      <!-- Tarjeta 1: Azul -->
+      <div class="col-lg-3 col-6">
+        <div class="small-box text-bg-primary">
+          <div class="inner">
+            <h3>$4,500</h3>
+            <p>Balance Actual</p>
+          </div>
+          <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
+          </svg>
+          <a href="#" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+            Ver detalles <i class="bi bi-arrow-right-circle"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2: Verde -->
+      <div class="col-lg-3 col-6">
+        <div class="small-box text-bg-success">
+          <div class="inner">
+            <h3>$12,000</h3>
+            <p>Ingresos Totales</p>
+          </div>
+          <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.035-.84-1.875-1.875-1.875h-.75zM9.75 8.625c-1.035 0-1.875.84-1.875 1.875v9.375c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875v-9.375c0-1.035-.84-1.875-1.875-1.875h-.75zM1.125 15c-1.035 0-1.875.84-1.875 1.875v3.375c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875v-3.375c0-1.035-.84-1.875-1.875-1.875h-.75z"></path>
+          </svg>
+          <a href="#" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+            Ver detalles <i class="bi bi-arrow-right-circle"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor del Gráfico -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="chart-card">
+          <div class="chart-header">Flujo de Efectivo</div>
+          <div class="chart-body">
+            <canvas id="expenseChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
