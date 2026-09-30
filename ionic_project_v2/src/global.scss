@@ -35,3 +35,12 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+/* Estilo personalizado para el mensaje sin conexión */
+ion-toast.toast-offline {
+  --background: #000000;      /* Fondo negro */
+  --color: #ff3333;           /* Texto rojo */
+  --button-color: #ff3333;    /* Botón CERRAR en rojo */
+  font-weight: bold;
+}

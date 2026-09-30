@@ -1,18 +1,27 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="dark">
     <ion-title>Gestión de Usuarios</ion-title>
+    
+    <!-- Botón de Cerrar Sesión en la esquina superior derecha -->
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="cerrarSesion()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        SALIR
+      </ion-button>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-list>
-    <ion-item>
-      <ion-label position="stacked">Nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="nuevoUsuario.nombre" placeholder="Nombre completo"></ion-input>
+<ion-content class="ion-padding" color="dark">
+  
+  <!-- Fondo transparente a la lista e items oscuros -->
+  <ion-list style="background: transparent;">
+    <ion-item color="dark">
+      <ion-input label="Nombre" labelPlacement="stacked" type="text" [(ngModel)]="nuevoUsuario.nombre" placeholder="Nombre completo"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Correo Electrónico</ion-label>
-      <ion-input type="email" [(ngModel)]="nuevoUsuario.email" placeholder="correo@ejemplo.com"></ion-input>
+    <ion-item color="dark">
+      <ion-input label="Correo Electrónico" labelPlacement="stacked" type="email" [(ngModel)]="nuevoUsuario.email" placeholder="correo@ejemplo.com"></ion-input>
     </ion-item>
   </ion-list>
 
@@ -20,17 +29,27 @@
     AGREGAR USUARIO
   </ion-button>
 
-  <h2 style="margin-top: 2rem;">Lista de Usuarios</h2>
-
-  <ion-list>
-    <ion-item *ngFor="let user of usuarios">
+  <h2 style="margin-top: 2rem; color: #ffffff;">Cuentas de Usuarios</h2>
+  
+  <!-- Fondo transparente a la lista e items oscuros -->
+  <ion-list style="background: transparent;">
+    <ion-item color="dark" *ngFor="let user of usuarios">
       <ion-label>
-        <h2>{{ user.nombre }}</h2>
+        <h2>{{ user.nombre }} <ion-badge [color]="user.saldo < 0 ? 'danger' : 'success'">${{ user.saldo || 0 }}</ion-badge></h2>
         <p>{{ user.email }}</p>
       </ion-label>
+      
+      <!-- Botones de Dinero -->
+      <ion-button slot="end" color="tertiary" size="small" (click)="procesarDinero(user.id, 'ingreso')">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" color="warning" size="small" (click)="procesarDinero(user.id, 'gasto')">
+        <ion-icon name="remove-circle"></ion-icon>
+      </ion-button>
       <ion-button slot="end" color="danger" fill="clear" (click)="eliminarUsuario(user.id)">
-        ELIMINAR
+        <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
+
 </ion-content>

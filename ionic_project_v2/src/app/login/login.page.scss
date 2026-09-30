@@ -1,0 +1,44 @@
+.login-container {
+  max-width: 400px;
+  margin: 40px auto 0 auto;
+  text-align: center;
+}
+
+.avatar-header {
+  margin-bottom: 30px;
+  .avatar-icon {
+    font-size: 80px;
+    color: #ffffff;
+  }
+  h2 {
+    color: #ffffff;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+}
+
+.transparent-list {
+  background: transparent;
+  margin-bottom: 20px;
+  padding: 0;
+
+  .input-item {
+    --background: #1e1e1e;
+    --border-color: transparent;
+    --border-radius: 10px;
+    --padding-start: 15px;
+
+    --color: #ffffff;
+    --placeholder-color: #cccccc;
+    color: #ffffff;
+
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  }
+}
+
+.login-btn {
+  margin-top: 20px;
+  font-weight: bold;
+  height: 48px;
+}

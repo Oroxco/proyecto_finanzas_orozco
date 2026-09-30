@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, ToastController } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -7,23 +8,61 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
   standalone: false
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
+  serverIp: string = 'localhost';
   usuario: string = '';
   password: string = '';
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private navCtrl: NavController,
+    private apiService: ApiService,
+    private toastController: ToastController
+  ) {}
+
+  ngOnInit() {
+    const savedIp = localStorage.getItem('server_ip');
+    if (savedIp) {
+      this.serverIp = savedIp;
+    }
+  }
 
   iniciarSesion() {
-    console.log('Datos ingresados:', this.usuario, this.password);
-
-    if (this.usuario.trim() === 'admin' && this.password.trim() === '1234') {
-      // 1. Guardar estado de sesión en el almacenamiento local
-      localStorage.setItem('isLogged', 'true');
-
-      // 2. Usar NavController de Ionic para forzar la navegación raíz
-      this.navCtrl.navigateRoot('/tabs');
-    } else {
-      alert('Credenciales incorrectas (Usa admin / 1234)');
+    if (!this.serverIp.trim() || !this.usuario.trim() || !this.password.trim()) {
+      this.mostrarMensaje('Por favor ingresa IP del servidor, usuario y contraseña');
+      return;
     }
+
+    localStorage.setItem('server_ip', this.serverIp.trim());
+
+    const credenciales = {
+      username: this.usuario.trim(),
+      password: this.password.trim()
+    };
+
+    this.apiService.login(credenciales).subscribe({
+      next: (respuesta: any) => {
+        if (respuesta && respuesta.success) {
+          localStorage.setItem('usuarioLogueado', JSON.stringify(respuesta.usuario || respuesta));
+          localStorage.setItem('isLogged', 'true');
+          this.navCtrl.navigateRoot('/tabs');
+        } else {
+          this.mostrarMensaje(respuesta?.mensaje || 'Credenciales incorrectas');
+        }
+      },
+      error: (err) => {
+        console.error('Error de conexión:', err);
+        this.mostrarMensaje('Error al conectar con el servidor');
+      }
+    });
+  }
+
+  async mostrarMensaje(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2500,
+      color: 'danger',
+      position: 'bottom'
+    });
+    await toast.present();
   }
 }

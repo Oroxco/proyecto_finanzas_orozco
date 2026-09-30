@@ -1,42 +1,56 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
     <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div style="display: flex; flex-direction: column; height: 100%; justify-content: center;">
+<ion-content class="ion-padding" color="dark">
+  <div class="login-container">
     
-    <div class="ion-text-center ion-margin-bottom">
-      <ion-icon name="person-circle-outline" style="font-size: 80px; color: var(--ion-color-primary);"></ion-icon>
+    <div class="logo-section">
+      <ion-icon name="person-circle-outline" class="main-icon"></ion-icon>
       <h2>Bienvenido</h2>
     </div>
 
-    <ion-list>
-      <ion-item>
+    <ion-list class="transparent-list">
+      <!-- Campo IP Servidor -->
+      <ion-item class="input-item">
+        <ion-icon name="server-outline" slot="start" color="medium"></ion-icon>
         <ion-input 
-          label="Usuario" 
-          label-placement="stacked" 
-          type="text" 
-          [(ngModel)]="usuario" 
-          placeholder="Ej: admin">
+          label="IP Servidor" 
+          labelPlacement="floating" 
+          placeholder="Ej: localhost o 192.168.1.50" 
+          [(ngModel)]="serverIp">
         </ion-input>
       </ion-item>
-      
-      <ion-item>
+
+      <!-- Campo Usuario -->
+      <ion-item class="input-item">
+        <ion-icon name="person-outline" slot="start" color="medium"></ion-icon>
+        <ion-input 
+          label="Usuario" 
+          labelPlacement="floating" 
+          placeholder="Ej: admin u oscar" 
+          [(ngModel)]="usuario">
+        </ion-input>
+      </ion-item>
+
+      <!-- Campo Contraseña -->
+      <ion-item class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start" color="medium"></ion-icon>
         <ion-input 
           label="Contraseña" 
-          label-placement="stacked" 
+          labelPlacement="floating" 
           type="password" 
-          [(ngModel)]="password" 
-          placeholder="Ej: 1234">
+          placeholder="Ej: 123456" 
+          [(ngModel)]="password">
         </ion-input>
       </ion-item>
     </ion-list>
 
-    <ion-button expand="block" class="ion-margin-top" (click)="iniciarSesion()">
+    <ion-button expand="block" shape="round" class="ion-margin-top" (click)="iniciarSesion()">
       ENTRAR
     </ion-button>
-    
+
   </div>
 </ion-content>

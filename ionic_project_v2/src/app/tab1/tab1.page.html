@@ -1,37 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>Contacto</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title>Historial de Movimientos</ion-title>
+    
+    <!-- Botón de cerrar sesión -->
     <ion-buttons slot="end">
-      <ion-button (click)="cerrarSesion()">Cerrar Sesión</ion-button>
+      <ion-button color="danger" (click)="cerrarSesion()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        SALIR
+      </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h2>Contacto Corporativo</h2>
-  <p>Calle Cualquiera, 44. Ciudad | +52 555 555 000</p>
+<ion-content class="ion-padding" color="dark">
+  
+  <ion-list style="background: transparent;">
+    <!-- Mensaje si no hay datos -->
+    <ion-item color="dark" *ngIf="historial.length === 0" lines="none">
+      <ion-label class="ion-text-center" color="medium">
+        No hay transacciones recientes.
+      </ion-label>
+    </ion-item>
 
-  <h2 style="margin-top: 1.5rem;">Enviar Mensaje</h2>
-  <ion-list>
-    <ion-item>
-      <ion-label position="stacked">Nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="contacto.nombre" placeholder="Tu nombre"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Empresa</ion-label>
-      <ion-input type="text" [(ngModel)]="contacto.empresa" placeholder="Tu empresa"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Correo</ion-label>
-      <ion-input type="email" [(ngModel)]="contacto.email" placeholder="correo@ejemplo.com"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Mensaje</ion-label>
-      <ion-textarea rows="3" [(ngModel)]="contacto.mensaje" placeholder="Escribe tu mensaje..."></ion-textarea>
+    <!-- Lista dinámica de transacciones -->
+    <ion-item color="dark" *ngFor="let item of historial">
+      <!-- Icono dinámico según el tipo -->
+      <ion-icon 
+        slot="start" 
+        [name]="item.tipo === 'ingreso' ? 'arrow-up-circle' : 'arrow-down-circle'" 
+        [color]="item.tipo === 'ingreso' ? 'success' : 'danger'">
+      </ion-icon>
+      
+      <ion-label>
+        <h2>{{ item.nombre }}</h2>
+        <p>{{ item.fecha | date:'short' }}</p>
+      </ion-label>
+
+      <!-- Monto en verde o rojo -->
+      <ion-note slot="end" [color]="item.tipo === 'ingreso' ? 'success' : 'danger'" style="font-weight: bold; font-size: 1.1rem;">
+        {{ item.tipo === 'ingreso' ? '+' : '-' }}${{ item.monto | number:'1.2-2' }}
+      </ion-note>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="block" class="ion-margin-top" (click)="enviarMensaje()">
-    Enviar Correo
-  </ion-button>
 </ion-content>
