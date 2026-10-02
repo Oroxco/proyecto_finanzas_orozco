@@ -34,16 +34,8 @@ Aplicación móvil híbrida Full-Stack y resiliente para el control de finanzas 
 
 ### 2. Configurar e Iniciar la Aplicación Móvil
 
+Para instalar dependencias e iniciar el servidor de desarrollo web:
+
 ```bash
-# Instalar dependencias del frontend
 npm install
-
-# Iniciar servidor de desarrollo web
 ionic serve
-
-# Compilar proyecto web y sincronizar con Capacitor
-ionic build
-npx cap sync android
-
-# Abrir el proyecto en Android Studio para generar el app-debug.apk
-npx cap open android
