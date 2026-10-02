@@ -33,6 +33,7 @@ Aplicación móvil híbrida Full-Stack y resiliente para el control de finanzas 
 4. Importa y ejecuta el script `db.sql` localizado en `api-backend/` para crear la base de datos `finanzas_db`.
 
 ### 2. Configurar e Iniciar la Aplicación Móvil
+
 ```bash
 # Instalar dependencias del frontend
 npm install
@@ -40,21 +41,9 @@ npm install
 # Iniciar servidor de desarrollo web
 ionic serve
 
-3. Compilación para Android / Generar APK
-Bash
 # Compilar proyecto web y sincronizar con Capacitor
 ionic build
 npx cap sync android
 
 # Abrir el proyecto en Android Studio para generar el app-debug.apk
 npx cap open android
-
----
-
-### Sincronizar el cambio en GitHub:
-Una vez guardado el archivo `README.md`, sube la actualización con:
-
-```bash
-git add README.md
-git commit -m "Docs: Actualizacion del README con arquitectura PHP, Capacitor y soporte Offline"
-git push
