@@ -1,41 +1,83 @@
-# Personal Expense Tracking App 📊
+# 📊 Personal Expense Tracking App
 
-Aplicación móvil híbrida Full-Stack y resiliente para el control de finanzas personales. Permite la gestión de ingresos/gastos, visualización gráfica del balance en tiempo real y soporte para funcionamiento sin conexión a internet (*Offline-First*).
-
----
-
-## 🛠️ Tecnologías Utilizadas
-
-- **Frontend:** Ionic Framework, Angular, TypeScript, Chart.js
-- **Nativo & Plugins:** Capacitor (`@capacitor/network`), Android Studio
-- **Backend:** PHP (REST API)
-- **Base de Datos:** MySQL (XAMPP / phpMyAdmin)
-- **Persistencia Local:** `localStorage`, RxJS (`tap`, `catchError`)
+Aplicación móvil híbrida **Full-Stack** para la gestión de finanzas personales.  
+Permite registrar ingresos y gastos, consultar el balance mediante gráficos y continuar utilizando la aplicación incluso cuando no existe conexión a Internet.
 
 ---
 
-## ⚡ Características Principales
+## ✨ Características
 
-- **Conexión IP Dinámica:** Configuración de la dirección IP del servidor desde la pantalla de Login para pruebas en red local con dispositivos móviles/emuladores.
-- **Modo Offline & Cache-First:** Almacenamiento local automático de datos. Ante fallas de red o caída del servidor, la app recupera la información guardada sin interrumpir la experiencia.
-- **Alertas Visuales Globales:** Notificación flotante personalizada (`ion-toast`) al navegar sin conexión a internet.
-- **Protección de Transacciones:** Bloqueo defensivo de operaciones de escritura (crear/eliminar) durante el modo offline para preservar la integridad de los datos.
-- **Dashboard Interactivo:** Gráficas de barras con Chart.js para el desglose diario de ingresos y gastos.
+- 💰 Registro y gestión de **ingresos y gastos**.
+- 📊 Dashboard con visualización gráfica del balance.
+- 📱 Aplicación híbrida desarrollada con **Ionic + Angular**.
+- 🌐 Configuración de **IP dinámica** para conectarse al backend desde dispositivos móviles o emuladores.
+- 📴 Funcionamiento **Offline-First** mediante almacenamiento local.
+- 🔄 Recuperación automática de información almacenada cuando el servidor no está disponible.
+- 🔔 Alertas visuales mediante `ion-toast` cuando se pierde la conexión.
+- 🔒 Bloqueo de operaciones de escritura cuando la aplicación está offline para proteger la integridad de los datos.
+- 📈 Gráficas de barras utilizando **Chart.js**.
 
 ---
 
-## 🚀 Requisitos e Instalación
+## 🛠️ Tecnologías utilizadas
 
-### 1. Base de Datos & Backend (XAMPP)
-1. Inicia los servicios de **Apache** y **MySQL** en XAMPP.
-2. Coloca la carpeta `api-backend` dentro de la ruta `htdocs` de XAMPP.
-3. Abre **phpMyAdmin** (`http://localhost/phpmyadmin`).
-4. Importa y ejecuta el script `db.sql` localizado en `api-backend/` para crear la base de datos `finanzas_db`.
+### Frontend
 
-### 2. Configurar e Iniciar la Aplicación Móvil
+- [Ionic Framework](https://ionicframework.com/)
+- [Angular](https://angular.dev/)
+- TypeScript
+- [Chart.js](https://www.chartjs.org/)
 
-Para instalar dependencias e iniciar el servidor de desarrollo web:
+### Aplicación nativa
 
-```bash
-npm install
-ionic serve
+- [Capacitor](https://capacitorjs.com/)
+- `@capacitor/network`
+- Android Studio
+
+### Backend
+
+- PHP
+- REST API
+
+### Base de datos
+
+- MySQL
+- XAMPP
+- phpMyAdmin
+
+### Persistencia local
+
+- `localStorage`
+- RxJS
+- `tap`
+- `catchError`
+
+---
+
+## 🏗️ Arquitectura
+
+La aplicación utiliza una arquitectura cliente-servidor:
+
+```text
+┌──────────────────────────┐
+│      Aplicación móvil    │
+│                          │
+│ Ionic + Angular          │
+│ TypeScript + Chart.js    │
+└────────────┬─────────────┘
+             │
+             │ HTTP / REST API
+             ▼
+┌──────────────────────────┐
+│        Backend           │
+│                          │
+│ PHP REST API             │
+└────────────┬─────────────┘
+             │
+             │ SQL
+             ▼
+┌──────────────────────────┐
+│        MySQL             │
+│                          │
+│      finanzas_db         │
+└──────────────────────────┘
