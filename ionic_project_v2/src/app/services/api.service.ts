@@ -3,31 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Usuario, MensajeContacto, Rol } from '../models/models';
+import { OrigenDatosService } from './origen-datos.service';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private origenDatos: OrigenDatosService) { }
 
-  private get apiUrl(): string {
-    let savedIp = localStorage.getItem('server_ip') || 'localhost';
-    savedIp = savedIp.trim();
-    if (!savedIp.startsWith('http://') && !savedIp.startsWith('https://')) {
-      savedIp = `http://${savedIp}`;
-    }
-    const hostWithoutProtocol = savedIp.replace(/^https?:\/\//, '');
-    if (!hostWithoutProtocol.includes(':')) {
-      savedIp = `${savedIp}:8080`;
-    }
-    if (!savedIp.endsWith('.php')) {
-      if (!savedIp.endsWith('/')) savedIp += '/';
-      savedIp += 'api_ionic/api.php';
-    }
-    return savedIp;
-  }
+  private get apiUrl(): string { return this.origenDatos.getApiUrl(); }
 
   login(credenciales: { username: string, password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}?tabla=login`, credenciales);
+    const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
+    this.origenDatos.recordDiagnostic({
+      metodo: 'POST', url: `${this.apiUrl}?tabla=login`,
+      payload: { username: credenciales.username, password: '[REDACTADO]' },
+      cabeceras: headers
+    });
+    return this.http.post(`${this.apiUrl}?tabla=login`, credenciales, { headers });
   }
 
   // --- ESTRATEGIA DE CACHÉ Y MANEJO DE ERRORES ---

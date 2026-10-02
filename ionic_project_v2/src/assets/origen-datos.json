@@ -1,0 +1,11 @@
+{
+  "protocol": "http",
+  "apiHost": "localhost",
+  "apiPort": 8080,
+  "apiPath": "api_ionic/api.php",
+  "dbProtocol": "mysql",
+  "dbHost": "localhost",
+  "dbPort": 3306,
+  "dbName": "app_ionic",
+  "note": "La configuración editable de la aplicación se guarda en el almacenamiento local del navegador."
+}

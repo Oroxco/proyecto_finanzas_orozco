@@ -1,0 +1,22 @@
+<ion-header><ion-toolbar color="dark"><ion-title>Origen de datos</ion-title></ion-toolbar></ion-header>
+<ion-content color="dark" class="ion-padding">
+  <ion-card color="dark"><ion-card-header><ion-card-title>Servidor API</ion-card-title><ion-card-subtitle>Esta configuración determina el destino de las llamadas desde las vistas.</ion-card-subtitle></ion-card-header>
+    <ion-card-content>
+      <ion-item color="dark"><ion-label>Protocolo</ion-label><ion-select [(ngModel)]="config.protocol"><ion-select-option value="http">HTTP</ion-select-option><ion-select-option value="https">HTTPS</ion-select-option></ion-select></ion-item>
+      <ion-item color="dark"><ion-input label="Host / IP del servidor" labelPlacement="stacked" [(ngModel)]="config.apiHost" placeholder="192.168.1.50 o localhost"></ion-input></ion-item>
+      <ion-item color="dark"><ion-input label="Puerto API" type="number" labelPlacement="stacked" [(ngModel)]="config.apiPort"></ion-input></ion-item>
+      <ion-item color="dark"><ion-input label="Ruta API" labelPlacement="stacked" [(ngModel)]="config.apiPath"></ion-input></ion-item>
+      <p class="url-preview">URL resultante: {{ config.protocol }}://{{ config.apiHost }}:{{ config.apiPort }}/{{ config.apiPath }}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card color="dark"><ion-card-header><ion-card-title>Base de datos</ion-card-title></ion-card-header><ion-card-content>
+    <ion-item color="dark"><ion-input label="Protocolo DB" labelPlacement="stacked" [(ngModel)]="config.dbProtocol"></ion-input></ion-item>
+    <ion-item color="dark"><ion-input label="Host DB" labelPlacement="stacked" [(ngModel)]="config.dbHost"></ion-input></ion-item>
+    <ion-item color="dark"><ion-input label="Puerto DB" type="number" labelPlacement="stacked" [(ngModel)]="config.dbPort"></ion-input></ion-item>
+    <ion-item color="dark"><ion-input label="Nombre de la base" labelPlacement="stacked" [(ngModel)]="config.dbName"></ion-input></ion-item>
+  </ion-card-content></ion-card>
+  <ion-button expand="block" (click)="guardar()">Guardar configuración</ion-button>
+  <ion-button expand="block" fill="outline" (click)="descargarJson()">Descargar JSON</ion-button>
+  <ion-card color="dark"><ion-card-header><ion-card-title>JSON actual</ion-card-title></ion-card-header><ion-card-content><pre>{{ verJson() }}</pre></ion-card-content></ion-card>
+  <ion-note color="medium">Nota: el navegador no puede escribir directamente sobre assets/origen-datos.json. Los cambios se guardan como JSON en el almacenamiento local de este navegador y puedes descargar el archivo actualizado. La conexión a MySQL se realiza en el servidor PHP, no directamente desde Ionic.</ion-note>
+</ion-content>

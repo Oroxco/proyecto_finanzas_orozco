@@ -24,6 +24,10 @@ const routes: Routes = [
           import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'origen-datos',
+        loadChildren: () => import('../origen-datos/origen-datos.module').then(m => m.OrigenDatosPageModule)
+      },
+      {
         path: '',
         redirectTo: 'tab1',
         pathMatch: 'full'

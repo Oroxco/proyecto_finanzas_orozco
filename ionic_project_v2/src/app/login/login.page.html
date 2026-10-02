@@ -48,6 +48,20 @@
       </ion-item>
     </ion-list>
 
+    <ion-card color="danger" *ngIf="diagnostico" class="error-log">
+      <ion-card-header><ion-card-title>Error de conexión / diagnóstico</ion-card-title></ion-card-header>
+      <ion-card-content>
+        <p><b>URL destino:</b> {{ diagnostico.url }}</p>
+        <p><b>IP/host destino:</b> {{ diagnostico.ipDestino }} · <b>Puerto API:</b> {{ diagnostico.puertoApi }}</p>
+        <p><b>Protocolo:</b> {{ diagnostico.protocolo }} · <b>Fecha:</b> {{ diagnostico.fecha | date:'short' }}</p>
+        <p><b>Base de datos:</b> {{ diagnostico.dbProtocol }}://{{ diagnostico.dbHost }}:{{ diagnostico.dbPort }}/{{ diagnostico.dbName }}</p>
+        <p><b>Error:</b> {{ diagnostico.error || 'Solicitud preparada' }}</p>
+        <p><b>Payload (contraseña protegida):</b></p><pre>{{ diagnostico.payload | json }}</pre>
+        <p><b>Cabeceras:</b></p><pre>{{ diagnostico.cabeceras | json }}</pre>
+      </ion-card-content>
+    </ion-card>
+    <ion-button *ngIf="!diagnostico" fill="clear" size="small" (click)="verDiagnostico()">Ver último diagnóstico</ion-button>
+
     <ion-button expand="block" shape="round" class="ion-margin-top" (click)="iniciarSesion()">
       ENTRAR
     </ion-button>

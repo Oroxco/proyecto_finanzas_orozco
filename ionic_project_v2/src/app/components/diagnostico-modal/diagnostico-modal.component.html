@@ -1,0 +1,21 @@
+<ion-button fill="outline" size="small" (click)="abrir()"><ion-icon name="bug-outline" slot="start"></ion-icon> Diagnóstico API</ion-button>
+<ion-modal [isOpen]="abierto" (didDismiss)="abierto=false">
+  <ng-template>
+    <ion-header><ion-toolbar color="dark"><ion-title>Diagnóstico de conexión</ion-title><ion-buttons slot="end"><ion-button (click)="abierto=false">Cerrar</ion-button></ion-buttons></ion-toolbar></ion-header>
+    <ion-content class="ion-padding">
+      <ng-container *ngIf="diagnostico as d">
+        <ion-list>
+          <ion-item><ion-label class="ion-text-wrap"><b>Fecha</b><p>{{ d.fecha | date:'medium' }}</p></ion-label></ion-item>
+          <ion-item><ion-label class="ion-text-wrap"><b>Método / protocolo</b><p>{{ d.metodo }} · {{ d.protocolo }}</p></ion-label></ion-item>
+          <ion-item><ion-label class="ion-text-wrap"><b>URL destino</b><p>{{ d.url }}</p></ion-label></ion-item>
+          <ion-item><ion-label class="ion-text-wrap"><b>IP/host destino y puerto</b><p>{{ d.ipDestino }} : {{ d.puertoApi }}</p></ion-label></ion-item>
+          <ion-item><ion-label class="ion-text-wrap"><b>Base de datos</b><p>{{ d.dbProtocol }}://{{ d.dbHost }}:{{ d.dbPort }}/{{ d.dbName }}</p></ion-label></ion-item>
+          <ion-item><ion-label class="ion-text-wrap"><b>Error</b><p>{{ d.error || 'Sin error registrado' }}</p></ion-label></ion-item>
+          <ion-item><ion-label class="ion-text-wrap"><b>Payload (sin contraseña real)</b><pre>{{ d.payload | json }}</pre></ion-label></ion-item>
+          <ion-item><ion-label class="ion-text-wrap"><b>Cabeceras de la solicitud</b><pre>{{ d.cabeceras | json }}</pre></ion-label></ion-item>
+        </ion-list>
+        <ion-note color="medium">Por seguridad, el navegador no puede conocer la IP pública real del servidor ni las cabeceras de respuesta si el servidor no las expone. Se muestra el host destino configurado y las cabeceras que prepara esta aplicación.</ion-note>
+      </ng-container>
+    </ion-content>
+  </ng-template>
+</ion-modal>
