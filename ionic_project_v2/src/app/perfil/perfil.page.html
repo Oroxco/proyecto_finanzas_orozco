@@ -1,0 +1,20 @@
+<ion-header><ion-toolbar color="dark"><ion-buttons slot="start"><ion-back-button defaultHref="/tabs/tab1"></ion-back-button></ion-buttons><ion-title>Mi perfil</ion-title><app-diagnostico-modal slot="end"></app-diagnostico-modal></ion-toolbar></ion-header>
+<ion-content color="dark" class="ion-padding">
+  <ion-card class="profile-card"><ion-card-content class="ion-text-center">
+    <ion-avatar class="avatar"><img *ngIf="fotoDataUrl; else sinFoto" [src]="fotoDataUrl" alt="Foto de perfil"></ion-avatar>
+    <ng-template #sinFoto><ion-icon name="person-circle-outline" class="avatar-placeholder"></ion-icon></ng-template>
+    <ion-button expand="block" fill="outline" (click)="selectorFoto.click()"><ion-icon name="image-outline" slot="start"></ion-icon>Elegir foto</ion-button>
+    <input #selectorFoto type="file" accept="image/*" hidden (change)="seleccionarFoto($event)">
+    <ion-button expand="block" color="tertiary" (click)="abrirCompartirMetadata()"><ion-icon name="bluetooth-outline" slot="start"></ion-icon>Compartir metadata por Bluetooth</ion-button>
+    <ion-button *ngIf="fotoDataUrl" expand="block" fill="clear" color="danger" (click)="quitarFoto()">Quitar foto</ion-button>
+  </ion-card-content></ion-card>
+  <ion-card><ion-card-header><ion-card-title>Datos personales</ion-card-title><ion-card-subtitle>Los cambios se guardan en el servidor; la foto se conserva en este dispositivo.</ion-card-subtitle></ion-card-header>
+  <ion-card-content>
+    <ion-item><ion-input label="Nombre" labelPlacement="stacked" [(ngModel)]="perfil.nombre" required></ion-input></ion-item>
+    <ion-item><ion-input label="Correo electrónico" labelPlacement="stacked" type="email" [(ngModel)]="perfil.email" required></ion-input></ion-item>
+    <ion-item><ion-input label="Nombre de usuario" labelPlacement="stacked" [(ngModel)]="perfil.username" required></ion-input></ion-item>
+    <ion-item><ion-input label="Nueva contraseña (opcional)" labelPlacement="stacked" type="password" [(ngModel)]="nuevaPassword" autocomplete="new-password" placeholder="Dejar vacío para no cambiarla"></ion-input></ion-item>
+    <ion-button expand="block" class="ion-margin-top" [disabled]="guardando" (click)="guardar()"><ion-spinner *ngIf="guardando" name="crescent"></ion-spinner><span *ngIf="!guardando">Guardar cambios</span></ion-button>
+  </ion-card-content></ion-card>
+  <ion-card *ngIf="metadata" class="metadata-card"><ion-card-header><ion-card-title>Metadata de la imagen (Exif)</ion-card-title><ion-card-subtitle>Datos que existan dentro del archivo seleccionado</ion-card-subtitle></ion-card-header><ion-card-content><ion-list lines="none" color="dark"><ion-item *ngFor="let dato of metadata | keyvalue"><ion-label class="ion-text-wrap"><strong>{{dato.key}}</strong><p>{{formatearMetadata(dato.value)}}</p></ion-label></ion-item></ion-list><p *ngIf="!metadata || !((metadata | keyvalue).length)">La imagen no contiene metadata Exif legible. Algunas aplicaciones eliminan estos datos al exportar imágenes.</p></ion-card-content></ion-card>
+</ion-content>

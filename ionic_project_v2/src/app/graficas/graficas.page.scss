@@ -1,0 +1,110 @@
+
+:host {
+  --ion-background-color: #1e1e1e;
+  --ion-text-color: #ffffff;
+  --ion-card-background: #292929;
+  --ion-item-background: #292929;
+  --ion-color-step-50: #292929;
+  --ion-color-step-100: #333333;
+}
+
+ion-content {
+  --background: #1e1e1e;
+  --color: #ffffff;
+}
+
+ion-toolbar {
+  --background: #242424;
+  --color: #ffffff;
+}
+
+.contenedor {
+  max-width: 1050px;
+  margin: auto;
+  padding: 12px;
+}
+
+ion-card {
+  --background: #292929;
+  --color: #ffffff;
+
+  background: #292929;
+  color: #ffffff;
+  border: 1px solid #414141;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+ion-card-header {
+  background: transparent;
+}
+
+ion-card-title {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+ion-card-subtitle {
+  color: #cccccc !important;
+}
+
+ion-item {
+  --background: #292929;
+  --color: #ffffff;
+  --border-color: #444444;
+}
+
+ion-label {
+  color: #ffffff;
+}
+
+ion-select {
+  --color: #ffffff;
+  --placeholder-color: #aaaaaa;
+  color: #ffffff;
+  min-height: 60px;
+}
+
+.grafica {
+  width: 100%;
+  min-height: 320px;
+  overflow: hidden;
+  color: #dddddd;
+  padding: 10px;
+}
+
+.grafica svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  color: #dddddd;
+}
+
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 0;
+  color: #dddddd;
+  font-size: 12px;
+}
+
+.leyenda span {
+  padding-left: 7px;
+}
+
+.nota {
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.vacio {
+  color: #cccccc;
+  text-align: center;
+  padding: 35px 15px;
+  font-size: 14px;
+}
+
+ion-spinner {
+  color: #6485ff;
+}

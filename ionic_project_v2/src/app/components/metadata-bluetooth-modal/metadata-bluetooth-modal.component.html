@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Metadata por Bluetooth BLE</ion-title>
+    <ion-buttons slot="end"><ion-button (click)="cerrar()">Cerrar</ion-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-segment [(ngModel)]="modo" (ionChange)="cambioModo()">
+    <ion-segment-button value="enviar"><ion-label>Celular A · Enviar</ion-label></ion-segment-button>
+    <ion-segment-button value="recibir"><ion-label>Celular B · Recibir</ion-label></ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngIf="modo === 'enviar'">
+    <h2>Enviar metadata Exif</h2>
+    <p>En el celular B entra a <strong>Recibir</strong> y toca <strong>Permitir recepción</strong>. Después busca y selecciona ese dispositivo aquí.</p>
+    <ion-note *ngIf="!metadata || !(metadata | keyvalue).length" color="warning">Primero elige una foto con datos Exif en la pantalla Mi perfil.</ion-note>
+    <ion-button expand="block" (click)="buscar()" [disabled]="buscando || enviando">
+      <ion-spinner *ngIf="buscando" name="crescent" slot="start"></ion-spinner>
+      <ion-icon *ngIf="!buscando" name="bluetooth-outline" slot="start"></ion-icon>
+      {{ buscando ? 'Buscando receptores (10 s)…' : 'Buscar celulares receptores' }}
+    </ion-button>
+    <ion-list *ngIf="dispositivos.length">
+      <ion-item button detail="true" *ngFor="let d of dispositivos" (click)="conectar(d)" [disabled]="enviando">
+        <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          {{ d.name || 'Celular receptor BLE' }}
+          <p>{{ d.deviceId }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <p *ngIf="!dispositivos.length && !buscando">Todavía no hay receptores detectados.</p>
+    <ion-note color="medium">Se pedirá confirmación antes de transmitir datos que podrían incluir GPS, fecha y cámara.</ion-note>
+  </ng-container>
+
+  <ng-container *ngIf="modo === 'recibir'">
+    <ion-icon name="shield-checkmark-outline" class="receive-icon"></ion-icon>
+    <h2>Recibir en este celular</h2>
+    <p>Activa el receptor y mantén esta ventana abierta. Cuando el otro teléfono se conecte, verás una pregunta para aceptar o rechazar. <strong>No se recibirán datos hasta que aceptes.</strong></p>
+    <ion-button *ngIf="!anunciando" expand="block" color="success" (click)="activarReceptor()">
+      <ion-icon name="radio-outline" slot="start"></ion-icon>Permitir recepción
+    </ion-button>
+    <ion-button *ngIf="anunciando" expand="block" fill="outline" color="danger" (click)="detenerReceptor()">Detener recepción</ion-button>
+    <ion-card *ngIf="metadataRecibida">
+      <ion-card-header>
+        <ion-card-title>Metadata recibida</ion-card-title>
+        <ion-card-subtitle>Información de la foto enviada desde el celular A</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item *ngFor="let item of metadataRecibida | keyvalue" lines="full">
+          <ion-label class="ion-text-wrap"><strong>{{ item.key }}</strong><p>{{ formatear(item.value) }}</p></ion-label>
+        </ion-item>
+        <p *ngIf="!(metadataRecibida | keyvalue).length">Se recibió un objeto sin campos de metadata.</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ion-card *ngIf="estado" color="light" class="state-card">
+    <ion-card-content><ion-icon name="information-circle-outline" slot="start"></ion-icon> {{ estado }}</ion-card-content>
+  </ion-card>
+  <ion-note color="medium">Funciona solamente entre instalaciones Android nativas en dos teléfonos físicos, con Bluetooth activado y permisos concedidos. El archivo de imagen no se transmite.</ion-note>
+</ion-content>

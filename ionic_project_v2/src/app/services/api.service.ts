@@ -12,6 +12,19 @@ export class ApiService {
 
   private get apiUrl(): string { return this.origenDatos.getApiUrl(); }
 
+
+  /** URL del endpoint PHP de perfil; conserva protocolo, host/IP y puerto configurados. */
+  getPerfilUrl(id?: number): string {
+    const base = this.apiUrl.replace(/\/[^/]*(?:\?.*)?$/, '/perfil.php');
+    return id ? `${base}?id=${encodeURIComponent(id)}` : base;
+  }
+  obtenerPerfil(id: number): Observable<any> {
+    return this.http.get(this.getPerfilUrl(id));
+  }
+  actualizarPerfil(id: number, datos: { nombre: string; email: string; username: string; password?: string }): Observable<any> {
+    return this.http.put(this.getPerfilUrl(id), datos, { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } });
+  }
+
   login(credenciales: { username: string, password: string }): Observable<any> {
     const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
     this.origenDatos.recordDiagnostic({

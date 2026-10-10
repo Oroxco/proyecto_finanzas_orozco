@@ -24,8 +24,16 @@ const routes: Routes = [
           import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'perfil',
+        loadChildren: () => import('../perfil/perfil.module').then(m => m.PerfilPageModule)
+      },
+      {
         path: 'origen-datos',
         loadChildren: () => import('../origen-datos/origen-datos.module').then(m => m.OrigenDatosPageModule)
+      },
+      {
+        path: 'graficas',
+        loadChildren: () => import('../graficas/graficas.module').then(m => m.GraficasPageModule)
       },
       {
         path: '',

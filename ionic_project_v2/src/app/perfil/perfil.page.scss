@@ -1,0 +1,107 @@
+.profile-card { margin-top: 0; }
+.avatar { width: 128px; height: 128px; margin: 8px auto 18px; }
+.avatar img { object-fit: cover; }
+.avatar-placeholder { font-size: 128px; color: var(--ion-color-medium); }
+.metadata-card ion-item { --background: transparent; }
+.metadata-card p { margin-top: 4px; color: var(--ion-color-medium); overflow-wrap: anywhere; }
+
+:host {
+  --ion-background-color: #1e1e1e;
+  --ion-text-color: #ffffff;
+  --ion-card-background: #292929;
+  --ion-item-background: #292929;
+  --ion-toolbar-background: #242424;
+  --ion-toolbar-color: #ffffff;
+  --ion-color-step-50: #292929;
+  --ion-color-step-100: #333333;
+  --ion-color-step-150: #3d3d3d;
+  --ion-color-step-200: #474747;
+}
+
+/* Fondo principal */
+ion-content {
+  --background: #1e1e1e;
+  --color: #ffffff;
+}
+
+/* Encabezado */
+ion-header ion-toolbar {
+  --background: #242424;
+  --color: #ffffff;
+  --border-color: #383838;
+}
+
+/* Tarjetas */
+ion-card {
+  --background: #292929;
+  --color: #ffffff;
+
+  background: #292929;
+  color: #ffffff;
+  border: 1px solid #3b3b3b;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+/* Títulos y textos */
+ion-card-title,
+ion-card-subtitle,
+ion-label,
+h1, h2, h3, p {
+  color: #ffffff;
+}
+
+ion-card-subtitle {
+  color: #bdbdbd;
+}
+
+/* Campos de formulario */
+ion-item {
+  --background: #292929;
+  --color: #ffffff;
+  --border-color: #484848;
+  --inner-border-width: 0 0 1px 0;
+  --highlight-color-focused: #536dfe;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  color: #ffffff;
+}
+
+/* Entradas de texto */
+ion-input {
+  --color: #ffffff;
+  --placeholder-color: #a5a5a5;
+  --highlight-color-focused: #536dfe;
+  color: #ffffff;
+}
+
+/* Botones */
+ion-button {
+  --border-radius: 6px;
+}
+
+ion-button[fill="outline"] {
+  --color: #6485ff;
+  --border-color: #6485ff;
+}
+
+/* Imagen de perfil */
+ion-avatar {
+  margin: 20px auto;
+  width: 115px;
+  height: 115px;
+}
+
+/* Barra inferior, si pertenece a esta vista */
+ion-tab-bar {
+  --background: #242424;
+  --color: #aaaaaa;
+  --color-selected: #ffffff;
+  border-top: 1px solid #383838;
+}
+
+/* Texto de ayuda */
+small,
+.text-muted {
+  color: #bdbdbd;
+}
