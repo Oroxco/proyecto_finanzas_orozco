@@ -39,7 +39,15 @@ const routes: Routes = [
         path: '',
         redirectTo: 'tab1',
         pathMatch: 'full'
-      }
+      },
+      {
+        path: 'editor-foto',
+        loadChildren: () => import('../editor-foto/editor-foto.module').then(m => m.EditorFotoPageModule)
+      },
+      {
+        path: 'api-rest',
+        loadChildren: () =>import('../api-rest/api-rest.module').then(m => m.ApiRestPageModule)
+      },
     ]
   }
 ];

@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/origen-datos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>API REST · Notas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="rest-container">
+    <section class="intro">
+      <h1>Notas conectadas a tu API</h1>
+      <p>Consulta, crea, actualiza y elimina notas guardadas en MySQL a través de tu API PHP.</p>
+    </section>
+
+    <section class="panel" aria-label="Conexión con la API">
+      <h2>Conexión PHP · XAMPP</h2>
+      <div class="connection">
+        <ion-input label="URL del archivo PHP" labelPlacement="stacked" type="url"
+          [ngModel]="urlApi()" (ngModelChange)="urlApi.set($event)" [disabled]="ocupado()"
+          placeholder="http://localhost:8080/api_ionic/demo_rest.php"></ion-input>
+        <ion-button (click)="conectar()" [disabled]="ocupado()">Conectar</ion-button>
+      </div>
+      <p class="muted">Inicia Apache y MySQL en XAMPP. En tu teléfono usa la IP de la computadora, por ejemplo http://192.168.1.10:8080/api_ionic/demo_rest.php.</p>
+    </section>
+
+    <div class="loading" role="status" aria-live="polite" *ngIf="ocupado()">
+      <ion-spinner name="crescent"></ion-spinner>
+      <span>{{ confirmando() ? 'Esperando confirmación…' : 'Solicitando ' + operacion() + '…' }}</span>
+    </div>
+    <div class="feedback error" role="alert" *ngIf="error() as fallo">
+      <strong>{{ fallo.status ? 'HTTP ' + fallo.status : 'Sin respuesta HTTP' }} · {{ fallo.codigo }}</strong>
+      <p>{{ fallo.message }}</p>
+    </div>
+    <div class="feedback success" role="status" aria-live="polite" *ngIf="exito()">{{ exito() }}</div>
+
+    <div class="workspace">
+      <section class="panel">
+        <div class="section-heading">
+          <h2>Notas <span class="count">{{ notas().length }}</span></h2>
+          <ion-button size="small" fill="outline" (click)="listar()" [disabled]="ocupado()">GET · Actualizar</ion-button>
+        </div>
+        <div class="search">
+          <ion-input label="Consultar una nota por ID" labelPlacement="stacked" type="number" min="1"
+            [ngModel]="idBusqueda()" (ngModelChange)="idBusqueda.set($event)" [disabled]="ocupado()"></ion-input>
+          <ion-button size="small" (click)="consultarId()" [disabled]="ocupado() || !idBusqueda()">GET · ID</ion-button>
+        </div>
+        <p class="muted" *ngIf="!notas().length && !ocupado()">No hay notas cargadas. Conecta la API o crea tu primera nota.</p>
+        <ul class="notes-list">
+          <li *ngFor="let nota of notas()" [class.selected]="seleccionada()?.id === nota.id">
+            <div class="note-text">
+              <strong><span class="note-id">#{{ nota.id }}</span> {{ nota.titulo }}</strong>
+              <p>{{ nota.descripcion || 'Sin descripción' }}</p>
+            </div>
+            <ion-button size="small" fill="outline" (click)="consultar(nota.id)" [disabled]="ocupado()">GET · Ver</ion-button>
+          </li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <h2>{{ seleccionada() ? 'Editar nota #' + seleccionada()!.id : 'Crear una nota' }}</h2>
+          <ion-button size="small" fill="clear" (click)="nuevaNota()" [disabled]="ocupado()">Nueva</ion-button>
+        </div>
+        <ion-input label="Título *" labelPlacement="stacked" maxlength="120"
+          [ngModel]="titulo()" (ngModelChange)="titulo.set($event)" [disabled]="ocupado()" placeholder="Mi primera nota"></ion-input>
+        <ion-textarea label="Descripción" labelPlacement="stacked" maxlength="2000" [autoGrow]="true" rows="3"
+          [ngModel]="descripcion()" (ngModelChange)="descripcion.set($event)" [disabled]="ocupado()"
+          placeholder="Escribe una descripción"></ion-textarea>
+        <div class="actions" *ngIf="!seleccionada(); else editar">
+          <ion-button (click)="crear()" [disabled]="ocupado() || !titulo().trim()">POST · Crear</ion-button>
+        </div>
+        <ng-template #editar>
+          <div class="actions">
+            <ion-button (click)="reemplazar()" [disabled]="ocupado() || !titulo().trim()">PUT · Guardar ambos campos</ion-button>
+            <ion-button fill="outline" (click)="actualizarTitulo()" [disabled]="ocupado() || !titulo().trim()">PATCH · Sólo título</ion-button>
+            <ion-button color="danger" fill="outline" (click)="eliminarSeleccionada()" [disabled]="ocupado()">DELETE · Eliminar</ion-button>
+          </div>
+          <p class="muted">PUT envía título y descripción. PATCH envía sólo el título y conserva la descripción del servidor.</p>
+        </ng-template>
+      </section>
+    </div>
+
+    <section class="panel" *ngIf="respuesta() !== null">
+      <h2>Respuesta de la API</h2>
+      <pre>{{ respuesta() | json }}</pre>
+    </section>
+    <section class="panel">
+      <h2>Últimas solicitudes</h2>
+      <p class="muted" *ngIf="!actividades().length">Aquí aparecerán el método y el estado HTTP de cada petición.</p>
+      <ul class="activity-list">
+        <li *ngFor="let actividad of actividades()">
+          <time>{{ actividad.fecha | date:'HH:mm:ss' }}</time>
+          <strong>{{ actividad.metodo }}</strong>
+          <code>{{ actividad.recurso }}</code>
+          <span class="status" [class.failed]="!actividad.exito">{{ actividad.status ? 'HTTP ' + actividad.status : 'Sin respuesta' }}</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+</ion-content>

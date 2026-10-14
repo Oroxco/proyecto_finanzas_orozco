@@ -1,1 +1,15 @@
+ion-tab-bar {
+  flex-shrink: 0;
+  z-index: 10;
+  --background: #222428;
+  --color: #bdbdbd;
+  --color-selected: #ffffff;
+  --border: 1px solid #383838;
+}
 
+// Conserva todas las pestañas y evita que sus extremos queden fuera de pantalla.
+ion-tab-button { min-width: 0; }
+ion-tab-button ion-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

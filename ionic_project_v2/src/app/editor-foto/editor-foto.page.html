@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Editar foto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="guardarFoto()" [disabled]="!listo() || ocupado()">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        {{ guardando() ? 'Guardando…' : 'Guardar' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="photo-screen">
+    <div class="capture-panel" [class.capture-panel-empty]="!foto()">
+      <ion-icon *ngIf="!foto()" name="camera-outline" class="camera-illustration" aria-hidden="true"></ion-icon>
+      <h1 *ngIf="!foto()">Toma una foto y hazla tuya</h1>
+      <p *ngIf="!foto()">Recorta, ajusta los colores, aplica filtros o añade texto. Al terminar, guarda tu foto editada.</p>
+      <ion-button (click)="tomarFoto()" [disabled]="ocupado()" [expand]="foto() ? undefined : 'block'">
+        <ion-icon name="camera-outline" slot="start"></ion-icon>
+        {{ capturando() ? 'Abriendo cámara…' : foto() ? 'Tomar otra foto' : 'Tomar foto' }}
+      </ion-button>
+      <ion-note *ngIf="!foto()">
+        {{ esNativo ? 'Las fotos se guardan en este dispositivo.' : 'En el navegador puedes seleccionar una imagen y descargar el resultado.' }}
+      </ion-note>
+    </div>
+
+    <div *ngIf="error()" class="error-panel" role="alert">
+      <p>{{ error() }}</p>
+      <ion-button *ngIf="foto() && !listo()" size="small" fill="outline" (click)="reintentarEditor()" [disabled]="ocupado()">Reintentar editor</ion-button>
+    </div>
+
+    <div class="editor-wrapper" [hidden]="!foto()" [attr.aria-busy]="cargando() || guardando()">
+      <div #editorContainer class="editor-container"></div>
+      <div *ngIf="cargando() || guardando()" class="editor-progress" role="status">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>{{ guardando() ? 'Guardando tu foto…' : 'Preparando el editor…' }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="fotoGuardada() as guardada" class="saved-panel" role="status">
+      <ion-icon name="checkmark-circle" color="success" aria-hidden="true"></ion-icon>
+      <div>
+        <strong>{{ guardada.guardadoEnNavegador ? 'Descarga solicitada' : 'Foto guardada' }}</strong>
+        <p>{{ guardada.nombre }}</p>
+        <p class="saved-path" *ngIf="guardada.uri">{{ guardada.uri }}</p>
+        <p *ngIf="guardada.guardadoEnNavegador">El navegador elige la carpeta de descarga.</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

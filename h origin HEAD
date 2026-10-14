@@ -1,0 +1,36 @@
+ .../android/app/capacitor.build.gradle             |   2 [32m+[m
+ ionic_project_v2/android/capacitor.settings.gradle |   6 [32m+[m
+ ionic_project_v2/angular.json                      |  14 [32m+[m[31m-[m
+ ionic_project_v2/package-lock.json                 | 214 [32m+++++++++++++[m[31m-[m
+ ionic_project_v2/package.json                      |  11 [32m+[m[31m-[m
+ ionic_project_v2/package.zip                       | Bin [31m0[m -> [32m17116819[m bytes
+ .../src/app/api-rest/api-rest-routing.module.ts    |   8 [32m+[m
+ .../src/app/api-rest/api-rest.module.ts            |  12 [32m+[m
+ .../src/app/api-rest/api-rest.page.html            | 102 [32m+++++++[m
+ .../src/app/api-rest/api-rest.page.scss            |  43 [32m+++[m
+ .../src/app/api-rest/api-rest.page.spec.ts         | 197 [32m+++++++++++++[m
+ ionic_project_v2/src/app/api-rest/api-rest.page.ts | 235 [32m+++++++++++++++[m
+ .../app/editor-foto/editor-foto-routing.module.ts  |   8 [32m+[m
+ .../src/app/editor-foto/editor-foto.locale.ts      | 263 [32m+++++++++++++++++[m
+ .../src/app/editor-foto/editor-foto.module.ts      |  11 [32m+[m
+ .../src/app/editor-foto/editor-foto.page.html      |  51 [32m++++[m
+ .../src/app/editor-foto/editor-foto.page.scss      |  18 [32m++[m
+ .../src/app/editor-foto/editor-foto.page.spec.ts   | 294 [32m+++++++++++++++++++[m
+ .../src/app/editor-foto/editor-foto.page.ts        | 245 [32m++++++++++++++++[m
+ .../explore-container.component.spec.ts            |   3 [32m+[m[31m-[m
+ .../src/app/origen-datos/origen-datos.page.html    |   4 [32m+[m
+ .../src/app/services/api-rest.service.spec.ts      | 151 [32m++++++++++[m
+ .../src/app/services/api-rest.service.ts           | 144 [32m++++++++++[m
+ .../src/app/services/foto-editor.service.spec.ts   | 166 [32m+++++++++++[m
+ .../src/app/services/foto-editor.service.ts        | 152 [32m++++++++++[m
+ .../src/app/tabs/tabs-routing.module.ts            |  10 [32m+[m[31m-[m
+ ionic_project_v2/src/app/tabs/tabs.page.html       |  13 [32m+[m[31m-[m
+ ionic_project_v2/src/app/tabs/tabs.page.scss       |  14 [32m+[m
+ .../src/environments/environment.prod.ts           |   6 [32m+[m[31m-[m
+ ionic_project_v2/src/environments/environment.ts   |   4 [32m+[m[31m-[m
+ ionic_project_v2/src/main.ts                       |   6 [32m+[m[31m-[m
+ ionic_project_v2/src/theme/variables.scss          |  40 [32m++[m[31m-[m
+ ionic_project_v2/tsconfig.json                     |   1 [32m+[m
+ package-lock.json                                  | 314 [32m+++++++++++++++++++++[m
+ package.json                                       |   3 [32m+[m
+ 35 files changed, 2749 insertions(+), 16 deletions(-)
